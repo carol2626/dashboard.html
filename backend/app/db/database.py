@@ -1,7 +1,7 @@
-# centraliza a base da conexão com o banco
+# Cria a conexão com o banco usando os dados que vieram do config.py
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-
+# usa o valor lido pelo config.py para criar a conexão
 from app.core.config import DATABASE_URL
 
 # engine é o objeto que conversa com o banco
