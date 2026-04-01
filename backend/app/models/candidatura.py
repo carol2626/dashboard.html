@@ -1,5 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
 from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
+
 from app.models.base import Base
 
 
@@ -16,5 +18,11 @@ class Candidatura(Base):
     observacoes = Column(Text, nullable=True)
     data_ultima_atualizacao = Column(DateTime(timezone=True), nullable=True)
     prioridade = Column(String, nullable=True)
-    
+
     criado_em = Column(DateTime(timezone=True), server_default=func.now())
+
+    # Candidatura pertence a um usuario / uma vaga. pode ter varias etapas / varios lembretes 
+    usuario = relationship("Usuario", back_populates="candidaturas")
+    vaga = relationship("Vaga", back_populates="candidaturas")
+    etapas = relationship("Etapa", back_populates="candidatura")
+    lembretes = relationship("Lembrete", back_populates="candidatura")
