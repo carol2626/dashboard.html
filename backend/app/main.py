@@ -1,11 +1,13 @@
 from fastapi import FastAPI
 from app.routes.health import router as health_router
+from app.routes.vaga import router as vaga_router
 
 # criei a aplicação
 app = FastAPI()
 
 # conecta a rota criada no health.py com a aplicação principal
 app.include_router(health_router)
+app.include_router(vaga_router)
 
 # criei uma rota get
 @app.get("/")
