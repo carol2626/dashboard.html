@@ -1,5 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
+
 from app.models.base import Base
 
 
@@ -17,3 +19,7 @@ class Lembrete(Base):
     descricao = Column(Text, nullable=True)
 
     criado_em = Column(DateTime(timezone=True), server_default=func.now())
+    # cada lembrete pertence a uma candidatura.
+    candidatura = relationship("Candidatura", back_populates="lembretes")
+    # um lembrete pode estar ligado a uma etapa específica.
+    etapa = relationship("Etapa", back_populates="lembretes")
