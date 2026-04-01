@@ -1,5 +1,7 @@
 from sqlalchemy import Column, Integer, String, DateTime, Text
+from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
+
 from app.models.base import Base
 
 # Criando classe usuario, que herda de base, SQLAlchemy entende que é model de banco
@@ -19,5 +21,9 @@ class Usuario(Base):
     curriculo_link = Column(String, nullable=True)
     resumo_profissional = Column(Text, nullable=True)
     habilidades = Column(Text, nullable=True)
-    
+
     criado_em = Column(DateTime(timezone=True), server_default=func.now())
+
+    # um usuário esta ligado a varias candidaturas
+    # no model candidatura existe o lado inverso dessa relação com nome usuario
+    candidaturas = relationship("Candidatura", back_populates="usuario")
