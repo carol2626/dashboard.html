@@ -17,4 +17,5 @@ class Etapa(Base):
     descricao = Column(Text, nullable=True)
     data_prevista = Column(DateTime(timezone=True), nullable=True)
     data_conclusao = Column(DateTime(timezone=True), nullable=True)
+    
     criado_em = Column(DateTime(timezone=True), server_default=func.now())

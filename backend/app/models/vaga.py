@@ -20,4 +20,5 @@ class Vaga(Base):
     localizacao = Column(String, nullable=True)
     salario_bolsa = Column(String, nullable=True)
     tipo_oportunidade = Column(String, nullable=True)
+    
     criado_em = Column(DateTime(timezone=True), server_default=func.now())

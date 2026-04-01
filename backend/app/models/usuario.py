@@ -19,4 +19,5 @@ class Usuario(Base):
     curriculo_link = Column(String, nullable=True)
     resumo_profissional = Column(Text, nullable=True)
     habilidades = Column(Text, nullable=True)
+    
     criado_em = Column(DateTime(timezone=True), server_default=func.now())

@@ -16,4 +16,5 @@ class Candidatura(Base):
     observacoes = Column(Text, nullable=True)
     data_ultima_atualizacao = Column(DateTime(timezone=True), nullable=True)
     prioridade = Column(String, nullable=True)
+    
     criado_em = Column(DateTime(timezone=True), server_default=func.now())
