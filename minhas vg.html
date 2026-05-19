@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Vagas</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 40px auto; 
+            padding: 20px; 
+            background-color: #f4f6f9;
+        }
+        h1, h2 { 
+            color: #333; 
+        }
+        h1 {
+            border-bottom: 2px solid #6f42c1;
+            padding-bottom: 10px;
+        }
+        .vaga { 
+            background-color: #fff;
+            border: 1px solid #e0e0e0; 
+            padding: 20px; 
+            margin-bottom: 15px; 
+            border-radius: 8px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .vaga h3 { 
+            margin-top: 0; 
+            color: #6f42c1; 
+        }
+        .status { 
+            font-weight: bold; 
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+        /* Cores de Status */
+        .status-andamento { background-color: #fff3cd; color: #856404; }
+        .status-analise { background-color: #cff4fc; color: #055160; }
+        
+        .meta-info {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        /* Formulário e Filtro */
+        .card-sistema {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+        }
+        .form-grupo {
+            margin-bottom: 12px;
+        }
+        .form-grupo label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #6f42c1;
+            color: white;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #5a32a3;
+        }
+        #busca {
+            border: 2px solid #6f42c1;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Painel de Monitoramento de Vagas</h1>
+
+    <div class="card-sistema">
+        <h2>Cadastrar Nova Vaga</h2>
+        <form id="form-vaga">
+            <div class="form-grupo">
+                <label for="cargo">Cargo:</label>
+                <input type="text" id="cargo" required placeholder="Ex: Desenvolvedor Front-End Júnior">
+            </div>
+            <div class="form-grupo">
+                <label for="empresa">Empresa:</label>
+                <input type="text" id="empresa" required placeholder="Ex: TechNexus">
+            </div>
+            <div class="form-grupo">
+                <label for="status-select">Status Atual:</label>
+                <select id="status-select">
+                    <option value="status-analise">Currículo em Análise</option>
+                    <option value="status-andamento">Teste Técnico em Andamento</option>
+                </select>
+            </div>
+            <button type="submit">Adicionar Vaga</button>
+        </form>
+    </div>
+
+    <div class="card-sistema">
+        <h2>Filtrar Vagas</h2>
+        <input type="text" id="busca" placeholder="Digite o cargo ou a empresa para buscar...">
+    </div>
+
+    <div id="lista-vagas">
+        <div class="vaga">
+            <h3>Desenvolvedor Front-End Júnior</h3>
+            <p><strong>Empresa:</strong> TechNexus Soluções Digitais</p>
+            <span class="status status-andamento">Teste Técnico em Andamento</span>
+        </div>
+
+        <div class="vaga">
+            <h3>Analista de Suporte TI</h3>
+            <p><strong>Empresa:</strong> TechNexus Soluções Digitais</p>
+            <span class="status status-analise">Currículo em Análise</span>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('form-vaga');
+        const listaVagas = document.getElementById('lista-vagas');
+        const barraBusca = document.getElementById('busca');
+
+        // Função para cadastrar nova vaga
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const cargo = document.getElementById('cargo').value;
+            const empresa = document.getElementById('empresa').value;
+            const statusClass = document.getElementById('status-select').value;
+            const statusTexto = document.getElementById('status-select').options[document.getElementById('status-select').selectedIndex].text;
+
+            // Criando a estrutura da nova vaga
+            const novaVaga = document.createElement('div');
+            novaVaga.classList.add('vaga');
+            novaVaga.innerHTML = `
+                <h3>${cargo}</h3>
+                <p><strong>Empresa:</strong> ${empresa}</p>
+                <span class="status ${statusClass}">${statusTexto}</span>
+            `;
+
+            // Adiciona no topo da lista e limpa o formulário
+            listaVagas.insertBefore(novaVaga, listaVagas.firstChild);
+            form.reset();
+        });
+
+        // Função para filtrar as vagas em tempo real
+        barraBusca.addEventListener('input', function() {
+            const termoBusca = barraBusca.value.toLowerCase();
+            const vagas = document.querySelectorAll('.vaga');
+
+            vagas.forEach(function(vaga) {
+                const cargo = vaga.querySelector('h3').innerText.toLowerCase();
+                const empresa = vaga.querySelector('p').innerText.toLowerCase();
+
+                if (cargo.includes(termoBusca) || empresa.includes(termoBusca)) {
+                    vaga.style.display = 'block';
+                } else {
+                    vaga.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
