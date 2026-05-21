@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destrava Vagas - Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            background-color: #f4f6f9;
+            height: 100vh;
+            color: #333;
+        }
+
+        /* Barra Lateral */
+        .sidebar {
+            width: 260px;
+            background-color: #0d1e3d;
+            color: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #ff6b00;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .menu-item {
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+        }
+
+        .menu-item.active, .menu-item:hover {
+            background-color: #ff6b00;
+            color: white;
+        }
+
+        .logout {
+            margin-top: auto;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        /* Conteúdo Principal */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            overflow-x: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            color: #1e293b;
+        }
+
+        .btn-nova-vaga {
+            background-color: #ff6b00;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .btn-nova-vaga:hover {
+            background-color: #e05e00;
+        }
+
+        /* Quadro Kanban */
+        .kanban-board {
+            display: flex;
+            gap: 15px;
+            flex: 1;
+            align-items: flex-start;
+        }
+
+        .column {
+            flex: 1;
+            min-width: 220px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            min-height: 500px;
+        }
+
+        /* Cores dos Cabeçalhos das Colunas */
+        .column-header {
+            padding: 10px;
+            border-radius: 6px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .col-aplicadas .column-header { background-color: #708090; }
+        .col-analise .column-header { background-color: #0056b3; }
+        .col-entrevista .column-header { background-color: #ff8c00; }
+        .col-teste .column-header { background-color: #4169e1; }
+        .col-aprovada .column-header { background-color: #20b2aa; }
+        .col-rejeitada .column-header { background-color: #dc3545; }
+
+        /* Lista de Cards */
+        .card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            min-height: 400px;
+        }
+
+        /* Estilo dos Cards de Vaga */
+        .card {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 12px;
+            cursor: grab;
+            transition: 0.2s;
+            position: relative;
+        }
+
+        .card:active {
+            cursor: grabbing;
+        }
+
+        .card h4 {
+            font-size: 15px;
+            color: #1e293b;
+            margin-bottom: 4px;
+        }
+
+        .card p {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 8px;
+        }
+
+        .card .date {
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        .btn-delete {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: none;
+            border: none;
+            color: #cbd5e1;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-delete:hover {
+            color: #dc3545;
+        }
+
+        /* Efeito visual ao arrastar */
+        .card.dragging {
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <div>
+            <div class="logo">🚀 Destrava Vagas</div>
+            <div class="menu-item">Início</div>
+            <div class="menu-item active">Minhas Vagas</div>
+            <div class="menu-item">Entrevistas</div>
+            <div class="menu-item">Calendário</div>
+            <div class="menu-item">Comparador</div>
+            <div class="menu-item">Relatórios</div>
+        </div>
+        <div class="logout">← Sair</div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <div>
+                <h1>Minhas Vagas</h1>
+                <p style="color: #64748b; font-size: 14px;">Acompanhe o status das suas candidaturas</p>
+            </div>
+            <button class="btn-nova-vaga" onclick="abrirPromptNovaVaga()">+ Nova vaga</button>
+        </div>
+
+        <div class="kanban-board">
+            
+            <div class="column col-aplicadas">
+                <div class="column-header">Aplicadas</div>
+                <div class="card-list" ondragover="allowDrop(event)" ondrop="drop(event)" id="aplicadas">
+                    </div>
+            </div>
+
+            <div class="column col-analise">
+                <div class="column-header">Em análise</div>
+                <div class="card-list" ondragover="allowDrop(event)" ondrop="drop(event)" id="analise"></div>
+            </div>
+
+            <div class="column col-entrevista">
+                <div class="column-header">Entrevista</div>
+                <div class="card-list" ondragover="allowDrop(event)" ondrop="drop(event)" id="entrevista"></div>
+            </div>
+
+            <div class="column col-teste">
+                <div class="column-header">Teste técnico</div>
+                <div class="card-list" ondragover="allowDrop(event)" ondrop="drop(event)" id="teste"></div>
+            </div>
+
+            <div class="column col-aprovada">
+                <div class="column-header">Aprovada</div>
+                <div class="card-list" ondragover="allowDrop(event)" ondrop="drop(event)" id="aprovada"></div>
+            </div>
+
+            <div class="column col-rejeitada">
+                <div class="column-header">Rejeitada</div>
+                <div class="card-list" ondragover="allowDrop(event)" ondrop="drop(event)" id="rejeitada"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Função para gerar um ID único para cada card
+        let cardIdCounter = 0;
+
+        function abrirPromptNovaVaga() {
+            const empresa = prompt("Nome da Empresa:");
+            if (!empresa) return;
+            
+            const cargo = prompt("Cargo / Vaga:");
+            if (!cargo) return;
+
+            const data = new Date().toLocaleDateString('pt-BR');
+
+            criarNovoCard(empresa, cargo, data, 'aplicadas');
+        }
+
+        function criarNovoCard(empresa, cargo, data, colunaId) {
+            cardIdCounter++;
+            const cardId = 'card-' + cardIdCounter;
+
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.id = cardId;
+            card.draggable = true;
+            card.ondragstart = drag;
+
+            card.innerHTML = `
+                <button class="btn-delete" onclick="deletarCard('${cardId}')">×</button>
+                <h4>${empresa}</h4>
+                <p>${cargo}</p>
+                <div class="date">${data}</div>
+            `;
+
+            document.getElementById(colunaId).appendChild(card);
+        }
+
+        // Funções de Arrastar e Soltar (Drag and Drop)
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+            event.target.classList.add('dragging');
+        }
+
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            const data = event.dataTransfer.getData("text");
+            const card = document.getElementById(data);
+            card.classList.remove('dragging');
+            
+            // Garante que o card caia na lista correta (.card-list)
+            let target = event.target;
+            while (target && !target.classList.contains('card-list')) {
+                target = target.parentElement;
+            }
+            
+            if (target) {
+                target.appendChild(card);
+            }
+        }
+
+        function deletarCard(id) {
+            if (confirm("Deseja remover essa vaga?")) {
+                document.getElementById(id).remove();
+            }
+        }
+
+        // Criando alguns exemplos iniciais vazados/mockados como na foto
+        window.onload = function() {
+            criarNovoCard("Mercado Livre", "Analista de BI", "17/05/2026", "aplicadas");
+            criarNovoCard("XP Inc.", "Analista de Dados Jr.", "19/05/2026", "analise");
+            criarNovoCard("Nubank", "Estágio em Dados", "20/05/2026", "entrevista");
+        };
+    </script>
+</body>
+</html>
