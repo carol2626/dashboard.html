@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <div>
+        <div class="logo">
+          <h2>MeuPainel</h2>
+        </div>
+        <nav class="menu">
+          <a href="#" class="active"><i class="fa-solid fa-chart-pie"></i> Visão Geral</a>
+          <a href="#"><i class="fa-solid fa-briefcase"></i> Vagas</a>
+          <a href="#"><i class="fa-solid fa-users"></i> Candidatos</a>
+          <a href="#"><i class="fa-solid fa-gear"></i> Configurações</a>
+        </nav>
+      </div>
+      <button class="logout-btn">Sair</button>
+    </aside>
+
+    <main class="main-content">
+      
+      <header class="topbar">
+        <div>
+          <h1>Olá, Recrutador</h1>
+          <p>Aqui está o resumo do seu dia.</p>
+        </div>
+        <div class="perfil">
+          <img src="https://via.placeholder.com/45" alt="Foto de Perfil">
+          <span>Alex Silva</span>
+        </div>
+      </header>
+
+      <section class="cards">
+        <div class="card blue">
+          <i class="fa-solid fa-folder-open"></i>
+          <h2>12</h2>
+          <p>Vagas Abertas</p>
+        </div>
+        <div class="card orange">
+          <i class="fa-solid fa-user-plus"></i>
+          <h2>148</h2>
+          <p>Novos Candidatos</p>
+        </div>
+        <div class="card blue">
+          <i class="fa-solid fa-calendar-check"></i>
+          <h2>5</h2>
+          <p>Entrevistas Hoje</p>
+        </div>
+        <div class="card orange">
+          <i class="fa-solid fa-circle-check"></i>
+          <h2>24</h2>
+          <p>Contratações</p>
+        </div>
+      </section>
+
+      <section class="overview">
+        <div class="overview-card">
+          <h3>Status do Processo</h3>
+          <div class="status-item"><span>Triagem</span><strong>45</strong></div>
+          <div class="status-item"><span>Entrevistas</span><strong>12</strong></div>
+          <div class="status-item"><span>Proposta</span><strong>3</strong></div>
+        </div>
+        <div class="overview-card">
+          <h3>Desempenho</h3>
+          <p>O tempo médio de contratação diminuiu em 15% neste mês. A taxa de retenção nos primeiros 90 dias permanece em 94%.</p>
+        </div>
+        <div class="overview-card">
+          <h3>Lembrete</h3>
+          <p>Não se esqueça de revisar as novas candidaturas para a vaga de Desenvolvedor Frontend até o final do dia.</p>
+        </div>
+      </section>
+
+      <section class="content-grid">
+        <div class="box">
+          <div class="box-header">
+            <h3>Últimas Vagas Publicadas</h3>
+          </div>
+          <div class="vaga-item">
+            <strong>Desenvolvedor(a) Full Stack Senior</strong>
+            <span>São Paulo - Híbrido</span>
+          </div>
+          <div class="vaga-item">
+            <strong>Designer de Produto (UX/UI)</strong>
+            <span>Remoto</span>
+          </div>
+          <div class="vaga-item">
+            <strong>Analista de Dados Pleno</strong>
+            <span>Rio de Janeiro - Presencial</span>
+          </div>
+        </div>
+
+        <div class="box">
+          <div class="box-header">
+            <h3>Atividades Recentes</h3>
+          </div>
+          <div class="atividade">
+            <p><strong>Mariana Souza</strong> se candidatou para vaga de Designer.</p>
+          </div>
+          <div class="atividade">
+            <p>Entrevista agendada com <strong>Carlos Eduardo</strong> às 15:00.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+</body>
+</html>

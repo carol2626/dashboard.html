@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard - Destrava Vagas</title>
+
+  <link rel="stylesheet" href="dashboard.css">
+
+  <!-- ICONS -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
+</head>
+
+<body>
+
+  <div class="dashboard-container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="logo">
+        <h2>🚀 Destrava Vagas</h2>
+      </div>
+
+      <nav class="menu">
+
+        <a href="#" class="active">
+          <i class="fa-solid fa-house"></i>
+          <span>Início</span>
+        </a>
+
+        <a href="#">
+          <i class="fa-solid fa-briefcase"></i>
+          <span>Minhas Vagas</span>
+        </a>
+
+        <a href="#">
+          <i class="fa-solid fa-calendar-days"></i>
+          <span>Entrevistas</span>
+        </a>
+
+        <a href="#">
+          <i class="fa-solid fa-chart-column"></i>
+          <span>Relatórios</span>
+        </a>
+
+        <a href="#">
+          <i class="fa-solid fa-gear"></i>
+          <span>Configurações</span>
+        </a>
+
+      </nav>
+
+      <button class="logout-btn" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        Sair
+      </button>
+
+    </aside>
+
+    <!-- CONTEÚDO -->
+    <main class="main-content">
+
+      <!-- TOPO -->
+      <header class="topbar">
+
+        <div>
+          <h1>Dashboard</h1>
+          <p>Acompanhe seus processos seletivos</p>
+        </div>
+
+        <div class="perfil">
+
+          <img
+            src="https://i.pravatar.cc/100"
+            alt="Usuário"
+          >
+
+          <span id="usuario"></span>
+
+        </div>
+
+      </header>
+
+      <!-- CARDS -->
+      <section class="cards">
+
+        <div class="card blue">
+          <i class="fa-solid fa-briefcase"></i>
+          <h2>0</h2>
+          <p>Candidaturas</p>
+        </div>
+
+        <div class="card orange">
+          <i class="fa-solid fa-calendar-check"></i>
+          <h2>0</h2>
+          <p>Entrevistas</p>
+        </div>
+
+        <div class="card blue">
+          <i class="fa-solid fa-spinner"></i>
+          <h2>0</h2>
+          <p>Em andamento</p>
+        </div>
+
+        <div class="card orange">
+          <i class="fa-solid fa-check"></i>
+          <h2>0</h2>
+          <p>Aprovadas</p>
+        </div>
+
+      </section>
+
+      <!-- VISÃO GERAL -->
+      <section class="overview">
+
+        <div class="overview-card">
+
+          <h3>Visão Geral</h3>
+
+          <p>
+            Aqui você acompanha todas as suas candidaturas,
+            entrevistas e processos seletivos em um só lugar.
+          </p>
+
+        </div>
+
+        <div class="overview-card">
+
+          <h3>Status do Processo</h3>
+
+          <div class="status-item">
+            <span>Em análise</span>
+            <strong>0</strong>
+          </div>
+
+          <div class="status-item">
+            <span>Entrevista marcada</span>
+            <strong>0</strong>
+          </div>
+
+          <div class="status-item">
+            <span>Finalizados</span>
+            <strong>0</strong>
+          </div>
+
+        </div>
+
+        <div class="overview-card">
+
+          <h3>Próximas Entrevistas</h3>
+
+          <p>Nenhuma entrevista agendada</p>
+
+        </div>
+
+      </section>
+
+      <!-- ÁREA CENTRAL -->
+      <section class="content-grid">
+
+        <!-- VAGAS -->
+        <div class="box">
+
+          <div class="box-header">
+            <h3>Candidaturas recentes</h3>
+          </div>
+
+          <div class="vaga-item">
+            <strong>Nenhuma candidatura ainda</strong>
+            <span>As vagas aparecerão aqui</span>
+          </div>
+
+        </div>
+
+        <!-- ATIVIDADES -->
+        <div class="box">
+
+          <div class="box-header">
+            <h3>Atividades recentes</h3>
+          </div>
+
+          <div class="atividade">
+            <p>Nenhuma atividade registrada</p>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </div>
+
+  <script>
+
+    // PEGAR USUÁRIO
+    const user = localStorage.getItem("user");
+
+    // PROTEÇÃO
+    if (!user) {
+      window.location.href = "index.html";
+    }
+
+    // MOSTRAR USUÁRIO
+    document.getElementById("usuario").innerText = user;
+
+    // LOGOUT
+    function logout() {
+      localStorage.removeItem("user");
+      window.location.href = "index.html";
+    }
+
+  </script>
+
+</body>
+</html>
