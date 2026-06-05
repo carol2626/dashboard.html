@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Destrava Vagas - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -14,185 +15,291 @@
 
         body {
             display: flex;
-            background-color: #f4f6f9;
+            background-color: #f8fafc;
             height: 100vh;
-            color: #333;
+            overflow: hidden;
         }
 
-        /* Barra Lateral */
+        /* --- MENU LATERAL (SIDEBAR) --- */
         .sidebar {
             width: 260px;
-            background-color: #0d1e3d;
+            background-color: #0d2353;
             color: white;
-            padding: 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            padding: 25px 0;
         }
 
-        .logo {
-            font-size: 22px;
-            font-weight: bold;
-            color: #ff6b00;
-            margin-bottom: 40px;
+        .logo-section {
             display: flex;
             align-items: center;
-            gap: 10px;
-        }
-
-        .menu-item {
-            padding: 12px 15px;
-            margin-bottom: 8px;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-        }
-
-        .menu-item.active, .menu-item:hover {
-            background-color: #ff6b00;
-            color: white;
-        }
-
-        .logout {
-            margin-top: auto;
-            color: #aaa;
-            cursor: pointer;
-        }
-
-        /* Conteúdo Principal */
-        .main-content {
-            flex: 1;
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            overflow-x: auto;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 0 25px;
             margin-bottom: 30px;
         }
 
-        .header h1 {
-            font-size: 28px;
+        .logo-section i {
+            font-size: 24px;
+            color: #ff6b00;
+            margin-right: 10px;
+        }
+
+        .logo-section h2 {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .menu-list {
+            list-style: none;
+            flex-grow: 1;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 25px;
+            color: #b0c4de;
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .menu-item i {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Item ativo (Laranja) */
+        .menu-item.active {
+            background-color: #ff6b00;
+            color: white;
+            border-radius: 0 10px 10px 0;
+            margin-right: 20px;
+            font-weight: bold;
+        }
+
+        .menu-item:hover:not(.active) {
+            background-color: #16326c;
+            color: white;
+        }
+
+        .logout-section {
+            padding: 0 25px;
+        }
+
+        .logout-btn {
+            color: #b0c4de;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+        }
+
+        .logout-btn i {
+            margin-right: 10px;
+        }
+
+        /* --- CONTEÚDO PRINCIPAL --- */
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Cabeçalho superior */
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .title-area h1 {
             color: #1e293b;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .title-area p {
+            color: #64748b;
+            font-size: 14px;
         }
 
         .btn-nova-vaga {
             background-color: #ff6b00;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
-            transition: 0.2s;
-        }
-
-        .btn-nova-vaga:hover {
-            background-color: #e05e00;
-        }
-
-        /* Quadro Kanban */
-        .kanban-board {
-            display: flex;
-            gap: 15px;
-            flex: 1;
-            align-items: flex-start;
-        }
-
-        .column {
-            flex: 1;
-            min-width: 220px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            min-height: 500px;
-        }
-
-        /* Cores dos Cabeçalhos das Colunas */
-        .column-header {
-            padding: 10px;
-            border-radius: 6px;
-            color: white;
-            font-weight: bold;
-            text-align: center;
             font-size: 14px;
-        }
-
-        .col-aplicadas .column-header { background-color: #708090; }
-        .col-analise .column-header { background-color: #0056b3; }
-        .col-entrevista .column-header { background-color: #ff8c00; }
-        .col-teste .column-header { background-color: #4169e1; }
-        .col-aprovada .column-header { background-color: #20b2aa; }
-        .col-rejeitada .column-header { background-color: #dc3545; }
-
-        /* Lista de Cards */
-        .card-list {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            min-height: 400px;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(255, 107, 0, 0.2);
         }
 
-        /* Estilo dos Cards de Vaga */
-        .card {
-            background-color: #f8fafc;
+        /* Barra de Busca e Filtros */
+        .filter-bar {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .search-container {
+            position: relative;
+            width: 250px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 10px 35px 10px 15px;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
-            padding: 12px;
-            cursor: grab;
-            transition: 0.2s;
-            position: relative;
+            font-size: 14px;
+            background-color: white;
+            outline: none;
         }
 
-        .card:active {
-            cursor: grabbing;
-        }
-
-        .card h4 {
-            font-size: 15px;
-            color: #1e293b;
-            margin-bottom: 4px;
-        }
-
-        .card p {
-            font-size: 13px;
-            color: #64748b;
-            margin-bottom: 8px;
-        }
-
-        .card .date {
-            font-size: 11px;
+        .search-container i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
             color: #94a3b8;
         }
 
-        .btn-delete {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: none;
-            border: none;
-            color: #cbd5e1;
+        .icon-btn {
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
             cursor: pointer;
+        }
+
+        /* --- KANBAN BOARD (COLUNAS) --- */
+        .kanban-board {
+            display: flex;
+            gap: 15px;
+            flex-grow: 1;
+            align-items: flex-start;
+            overflow-x: auto;
+            padding-bottom: 20px;
+        }
+
+        .kanban-column {
+            flex: 1;
+            min-width: 180px;
+            background-color: transparent;
+        }
+
+        /* Títulos das Colunas com as Cores da Foto */
+        .column-header {
+            color: white;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 13px;
             font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
         }
 
-        .btn-delete:hover {
-            color: #dc3545;
+        .col-aplicadas { background-color: #2b59c3; }
+        .col-analise { background-color: #0f52ba; }
+        .col-entrevista { background-color: #ff6b00; }
+        .col-teste { background-color: #4a77ff; }
+        .col-aprovada { background-color: #10b981; }
+        .col-rejeitada { background-color: #ef4444; }
+
+        .badge-count {
+            background-color: rgba(0, 0, 0, 0.15);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
         }
 
-        /* Efeito visual ao arrastar */
-        .card.dragging {
-            opacity: 0.5;
+        /* Cards de Vagas */
+        .card-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .vaga-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            border: 1px solid #edf2f7;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .company-logo {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .vaga-card h4 {
+            color: #1e293b;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .vaga-card p {
+            color: #64748b;
+            font-size: 11px;
+        }
+
+        .vaga-card .date {
+            color: #94a3b8;
+            font-size: 10px;
+            margin-top: 2px;
+        }
+
+        /* Botão de Adicionar vaga na coluna */
+        .btn-add-col {
+            background-color: white;
+            border: 1px dashed #cbd5e1;
+            color: #64748b;
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 5px;
+            transition: all 0.2s;
+        }
+
+        .btn-add-col:hover {
+            background-color: #f1f5f9;
+            border-color: #94a3b8;
         }
     </style>
 </head>
@@ -200,137 +307,205 @@
 
     <div class="sidebar">
         <div>
-            <div class="logo">🚀 Destrava Vagas</div>
-            <div class="menu-item">Início</div>
-            <div class="menu-item active">Minhas Vagas</div>
-            <div class="menu-item">Entrevistas</div>
-            <div class="menu-item">Calendário</div>
-            <div class="menu-item">Comparador</div>
-            <div class="menu-item">Relatórios</div>
+            <div class="logo-section">
+                <i class="fa-solid fa-rocket"></i>
+                <h2>Destrava<br>Vagas</h2>
+            </div>
+            <ul class="menu-list">
+                <li><a href="#" class="menu-item"><i class="fa-solid fa-house"></i> Início</a></li>
+                <li><a href="#" class="menu-item active"><i class="fa-solid fa-table-cells-large"></i> Minhas Vagas</a></li>
+                <li><a href="#" class="menu-item"><i class="fa-solid fa-users"></i> Entrevistas</a></li>
+                <li><a href="#" class="menu-item"><i class="fa-solid fa-calendar-days"></i> Calendário</a></li>
+                <li><a href="#" class="menu-item"><i class="fa-solid fa-chart-simple"></i> Comparador</a></li>
+                <li><a href="#" class="menu-item"><i class="fa-solid fa-chart-line"></i> Relatórios</a></li>
+                <li><a href="#" class="menu-item"><i class="fa-solid fa-comment-dots"></i> Mensagens</a></li>
+                <li><a href="#" class="menu-item"><i class="fa-solid fa-gear"></i> Configurações</a></li>
+            </ul>
         </div>
-        <div class="logout">← Sair</div>
+        <div class="logout-section">
+            <a href="#" class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Sair</a>
+        </div>
     </div>
 
     <div class="main-content">
-        <div class="header">
-            <div>
+        
+        <div class="header-top">
+            <div class="title-area">
                 <h1>Minhas Vagas</h1>
-                <p style="color: #64748b; font-size: 14px;">Acompanhe o status das suas candidaturas</p>
+                <p>Acompanhe o status das suas candidaturas</p>
             </div>
-            <button class="btn-nova-vaga" onclick="abrirPromptNovaVaga()">+ Nova vaga</button>
+            <button class="btn-nova-vaga"><i class="fa-solid fa-plus"></i> Nova vaga</button>
+        </div>
+
+        <div class="filter-bar">
+            <div class="search-container">
+                <input type="text" placeholder="Buscar vaga...">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <button class="icon-btn"><i class="fa-solid fa-sliders"></i></button>
+            <button class="icon-btn"><i class="fa-solid fa-table-list"></i></button>
         </div>
 
         <div class="kanban-board">
             
-            <div class="column col-aplicadas">
-                <div class="column-header">Aplicadas</div>
-                <div class="card-list" ondragover="allowDrop(event)" ondrop="drop(event)" id="aplicadas">
+            <div class="kanban-column">
+                <div class="column-header col-aplicadas">
+                    <span>Aplicadas</span>
+                    <span class="badge-count">6</span>
+                </div>
+                <div class="card-container">
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #fff000; color: #000;">M</div>
+                        <h4>Mercado Livre</h4>
+                        <p>Analista de BI</p>
+                        <span class="date">17/05/2024</span>
                     </div>
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #000; color: #fff;">ml</div>
+                        <h4>Magazine Luiza</h4>
+                        <p>Dados Jr.</p>
+                        <span class="date">16/05/2024</span>
+                    </div>
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #f3f4f6; color: #333;"><i class="fa-solid fa-building"></i></div>
+                        <h4>Ambev</h4>
+                        <p>Estágio em Dados</p>
+                        <span class="date">15/05/2024</span>
+                    </div>
+                    <button class="btn-add-col"><i class="fa-solid fa-plus"></i> Adicionar vaga</button>
+                </div>
             </div>
 
-            <div class="column col-analise">
-                <div class="column-header">Em análise</div>
-                <div class="card-list" ondragover="allowDrop(event)" ondrop="drop(event)" id="analise"></div>
+            <div class="kanban-column">
+                <div class="column-header col-analise">
+                    <span>Em análise</span>
+                    <span class="badge-count">4</span>
+                </div>
+                <div class="card-container">
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #1e1e1e; color: #fff; font-size: 9px;">xp</div>
+                        <h4>XP Inc.</h4>
+                        <p>Analista de Dados Jr.</p>
+                        <span class="date">19/05/2024</span>
+                    </div>
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #1a237e; color: #fff;">S</div>
+                        <h4>Stone</h4>
+                        <p>Estágio em Dados</p>
+                        <span class="date">18/05/2024</span>
+                    </div>
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #000; color: #fff;">p</div>
+                        <h4>Pagar.me</h4>
+                        <p>Dados e Analytics</p>
+                        <span class="date">17/05/2024</span>
+                    </div>
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #311b92; color: #fff; font-size: 9px;">xp</div>
+                        <h4>RD Station</h4>
+                        <p>Analista de BI</p>
+                        <span class="date">15/05/2024</span>
+                    </div>
+                    <button class="btn-add-col"><i class="fa-solid fa-plus"></i> Adicionar vaga</button>
+                </div>
             </div>
 
-            <div class="column col-entrevista">
-                <div class="column-header">Entrevista</div>
-                <div class="card-list" ondragover="allowDrop(event)" ondrop="drop(event)" id="entrevista"></div>
+            <div class="kanban-column">
+                <div class="column-header col-entrevista">
+                    <span>Entrevista</span>
+                    <span class="badge-count">3</span>
+                </div>
+                <div class="card-container">
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #820ad1; color: #fff; font-size: 10px;">nu</div>
+                        <h4>Nubank</h4>
+                        <p>Estágio em Dados</p>
+                        <span class="date">20/05/2024</span>
+                    </div>
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #ea1d2c; color: #fff; font-size: 9px;">if</div>
+                        <h4>iFood</h4>
+                        <p>Cientista de Dados</p>
+                        <span class="date">18/05/2024</span>
+                    </div>
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #0660f4; color: #fff;"><i class="fa-solid fa-g"></i></div>
+                        <h4>Globo</h4>
+                        <p>Analista de Dados</p>
+                        <span class="date">17/05/2024</span>
+                    </div>
+                    <button class="btn-add-col"><i class="fa-solid fa-plus"></i> Adicionar vaga</button>
+                </div>
             </div>
 
-            <div class="column col-teste">
-                <div class="column-header">Teste técnico</div>
-                <div class="card-list" ondragover="allowDrop(event)" ondrop="drop(event)" id="teste"></div>
+            <div class="kanban-column">
+                <div class="column-header col-teste">
+                    <span>Teste técnico</span>
+                    <span class="badge-count">2</span>
+                </div>
+                <div class="card-container">
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #1c51e0; color: #fff;">Q</div>
+                        <h4>QuintoAndar</h4>
+                        <p>Dados Júnior</p>
+                        <span class="date">16/05/2024</span>
+                    </div>
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #111; color: #fff; font-size: 9px;">loft</div>
+                        <h4>Loft</h4>
+                        <p>Analista de BI</p>
+                        <span class="date">15/05/2024</span>
+                    </div>
+                    <button class="btn-add-col"><i class="fa-solid fa-plus"></i> Adicionar vaga</button>
+                </div>
             </div>
 
-            <div class="column col-aprovada">
-                <div class="column-header">Aprovada</div>
-                <div class="card-list" ondragover="allowDrop(event)" ondrop="drop(event)" id="aprovada"></div>
+            <div class="kanban-column">
+                <div class="column-header col-aprovada">
+                    <span>Aprovada</span>
+                    <span class="badge-count">1</span>
+                </div>
+                <div class="card-container">
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #000; color: #fff;">X</div>
+                        <h4>Empresa X</h4>
+                        <p>Analista de Dados</p>
+                        <span class="date">10/05/2024</span>
+                    </div>
+                    <button class="btn-add-col"><i class="fa-solid fa-plus"></i> Adicionar vaga</button>
+                </div>
             </div>
 
-            <div class="column col-rejeitada">
-                <div class="column-header">Rejeitada</div>
-                <div class="card-list" ondragover="allowDrop(event)" ondrop="drop(event)" id="rejeitada"></div>
+            <div class="kanban-column">
+                <div class="column-header col-rejeitada">
+                    <span>Rejeitada</span>
+                    <span class="badge-count">3</span>
+                </div>
+                <div class="card-container">
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #000; color: #fff; font-size: 9px;">C6</div>
+                        <h4>C6 Bank</h4>
+                        <p>Analista de Dados</p>
+                        <span class="date">12/05/2024</span>
+                    </div>
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #111; color: #fff;"><i class="fa-solid fa-heart-pulse"></i></div>
+                        <h4>HealthBit</h4>
+                        <p>Dados Júnior</p>
+                        <span class="date">11/05/2024</span>
+                    </div>
+                    <div class="vaga-card">
+                        <div class="company-logo" style="background-color: #0052ff; color: #fff;"><i class="fa-solid fa-infinity"></i></div>
+                        <h4>Neon</h4>
+                        <p>Estágio em Dados</p>
+                        <span class="date">10/05/2024</span>
+                    </div>
+                    <button class="btn-add-col"><i class="fa-solid fa-plus"></i> Adicionar vaga</button>
+                </div>
             </div>
 
         </div>
     </div>
 
-    <script>
-        // Função para gerar um ID único para cada card
-        let cardIdCounter = 0;
-
-        function abrirPromptNovaVaga() {
-            const empresa = prompt("Nome da Empresa:");
-            if (!empresa) return;
-            
-            const cargo = prompt("Cargo / Vaga:");
-            if (!cargo) return;
-
-            const data = new Date().toLocaleDateString('pt-BR');
-
-            criarNovoCard(empresa, cargo, data, 'aplicadas');
-        }
-
-        function criarNovoCard(empresa, cargo, data, colunaId) {
-            cardIdCounter++;
-            const cardId = 'card-' + cardIdCounter;
-
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.id = cardId;
-            card.draggable = true;
-            card.ondragstart = drag;
-
-            card.innerHTML = `
-                <button class="btn-delete" onclick="deletarCard('${cardId}')">×</button>
-                <h4>${empresa}</h4>
-                <p>${cargo}</p>
-                <div class="date">${data}</div>
-            `;
-
-            document.getElementById(colunaId).appendChild(card);
-        }
-
-        // Funções de Arrastar e Soltar (Drag and Drop)
-        function drag(event) {
-            event.dataTransfer.setData("text", event.target.id);
-            event.target.classList.add('dragging');
-        }
-
-        function allowDrop(event) {
-            event.preventDefault();
-        }
-
-        function drop(event) {
-            event.preventDefault();
-            const data = event.dataTransfer.getData("text");
-            const card = document.getElementById(data);
-            card.classList.remove('dragging');
-            
-            // Garante que o card caia na lista correta (.card-list)
-            let target = event.target;
-            while (target && !target.classList.contains('card-list')) {
-                target = target.parentElement;
-            }
-            
-            if (target) {
-                target.appendChild(card);
-            }
-        }
-
-        function deletarCard(id) {
-            if (confirm("Deseja remover essa vaga?")) {
-                document.getElementById(id).remove();
-            }
-        }
-
-        // Criando alguns exemplos iniciais vazados/mockados como na foto
-        window.onload = function() {
-            criarNovoCard("Mercado Livre", "Analista de BI", "17/05/2026", "aplicadas");
-            criarNovoCard("XP Inc.", "Analista de Dados Jr.", "19/05/2026", "analise");
-            criarNovoCard("Nubank", "Estágio em Dados", "20/05/2026", "entrevista");
-        };
-    </script>
 </body>
 </html>

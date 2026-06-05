@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+      const user = localStorage.getItem("user");
+      if (user) {
+        window.location.href = "home.html"; // Se JÁ está logado, vai direto para a home
+      }
+    </script>
 </head>
 <body>
-
+<nav style="background-color: #f0f0f0; padding: 10px; margin-bottom: 20px;">
+    <a href="index.html" style="margin-right: 15px; text-decoration: none; color: black;">Home</a>
+    <a href="cadastro.html" style="margin-right: 15px; text-decoration: none; color: black;">Cadastro de Vagas</a>
+    <a href="comparador.html" style="font-weight: bold; text-decoration: none; color: blue;">Comparador de Vagas</a>
+</nav>
   <div class="dashboard-container">
     
     <aside class="sidebar">

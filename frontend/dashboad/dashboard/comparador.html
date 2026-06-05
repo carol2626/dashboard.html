@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Destrava Vagas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Ajuste fino para emular perfeitamente as cores das tags da imagem */
+        .status-aplicadas { bg-color: #e2e8f0; text-color: #334155; }
+        .status-analise { bg-color: #1e3a8a; text-color: #ffffff; }
+        .status-entrevista { bg-color: #ea580c; text-color: #ffffff; }
+        .status-teste { bg-color: #2563eb; text-color: #ffffff; }
+        .status-aprovada { bg-color: #0d9488; text-color: #ffffff; }
+        .status-rejeitada { bg-color: #dc2626; text-color: #ffffff; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800 antialiased flex h-screen overflow-hidden">
+
+    <aside class="w-64 bg-[#0B1E43] text-gray-300 flex flex-col justify-between p-4 flex-shrink-0">
+        <div>
+            <div class="flex items-center gap-3 px-2 py-4 mb-6">
+                <div class="bg-gradient-to-tr from-orange-500 to-amber-400 p-2 rounded-xl text-white">
+                    <i class="fa-solid fa-rocket text-xl animate-pulse"></i>
+                </div>
+                <div>
+                    <h1 class="text-white font-bold text-lg leading-tight">Destrava</h1>
+                    <span class="text-orange-400 font-bold text-sm tracking-wider uppercase block -mt-1">Vagas</span>
+                </div>
+            </div>
+
+            <nav class="space-y-1">
+                <button onclick="switchTab('inicio')" id="btn-inicio" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 hover:bg-white/10 text-left">
+                    <i class="fa-solid fa-house w-5"></i> Início
+                </button>
+                <button onclick="switchTab('minhas-vagas')" id="btn-minhas-vagas" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 bg-orange-500 text-white font-medium text-left shadow-lg shadow-orange-500/20">
+                    <i class="fa-solid fa-table-columns w-5"></i> Minhas Vagas
+                </button>
+                <button onclick="switchTab('comparador')" id="btn-comparador" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 hover:bg-white/10 text-left">
+                    <i class="fa-solid fa-chart-simple w-5"></i> Comparador
+                </button>
+                <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 hover:bg-white/10 text-left opacity-60 cursor-not-allowed">
+                    <i class="fa-solid fa-calendar-days w-5"></i> Calendário
+                </button>
+                <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 hover:bg-white/10 text-left opacity-60 cursor-not-allowed">
+                    <i class="fa-solid fa-message w-5"></i> Mensagens
+                </button>
+                <button class="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 hover:bg-white/10 text-left opacity-60 cursor-not-allowed">
+                    <i class="fa-solid fa-gear w-5"></i> Configurações
+                </button>
+            </nav>
+        </div>
+
+        <button class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-red-500/10 hover:text-red-400 transition duration-200 text-left">
+            <i class="fa-solid fa-right-from-bracket w-5"></i> Sair
+        </button>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto p-8 bg-slate-50">
+
+        <div id="page-minhas-vagas" class="space-y-6 block">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-800">Minhas Vagas</h2>
+                    <p class="text-slate-500 text-sm mt-1">Acompanhe o status das suas candidaturas</p>
+                </div>
+                <button class="bg-orange-500 hover:bg-orange-600 text-white font-medium px-5 py-2.5 rounded-xl shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-plus text-sm"></i> Nova vaga
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4 items-start">
+                
+                <div class="bg-slate-100/80 rounded-2xl p-3 border border-slate-200/60 space-y-3">
+                    <div class="bg-slate-200 text-slate-700 px-3 py-1.5 rounded-xl text-xs font-bold flex justify-between items-center">
+                        <span>Aplicadas</span> <span class="bg-slate-300 text-slate-800 px-2 py-0.5 rounded-md text-[10px]">3</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-yellow-500 text-lg font-bold">🤝</span>
+                            <h4 class="font-bold text-sm text-slate-800">Mercado Livre</h4>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Analista de BI</p>
+                        <p class="text-[10px] text-slate-400"><i class="fa-regular fa-calendar mr-1"></i> 17/05/2026</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-blue-500 text-xs font-extrabold font-mono">magalu</span>
+                            <h4 class="font-bold text-sm text-slate-800">Magazine Luiza</h4>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Dados Jr.</p>
+                        <p class="text-[10px] text-slate-400"><i class="fa-regular fa-calendar mr-1"></i> 16/05/2026</p>
+                    </div>
+                    <button class="w-full border-2 border-dashed border-slate-300 text-slate-400 hover:text-slate-600 hover:border-slate-400 py-2 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1">
+                        + Adicionar vaga
+                    </button>
+                </div>
+
+                <div class="bg-slate-100/80 rounded-2xl p-3 border border-slate-200/60 space-y-3">
+                    <div class="bg-blue-800 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex justify-between items-center">
+                        <span>Em análise</span> <span class="bg-blue-900 px-2 py-0.5 rounded-md text-[10px]">2</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-black text-white text-[9px] px-1 font-bold rounded">xp</span>
+                            <h4 class="font-bold text-sm text-slate-800">XP Inc.</h4>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Analista de Dados Jr.</p>
+                        <p class="text-[10px] text-slate-400"><i class="fa-regular fa-calendar mr-1"></i> 19/05/2026</p>
+                    </div>
+                    <button class="w-full border-2 border-dashed border-slate-300 text-slate-400 hover:text-slate-600 hover:border-slate-400 py-2 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1">
+                        + Adicionar vaga
+                    </button>
+                </div>
+
+                <div class="bg-slate-100/80 rounded-2xl p-3 border border-slate-200/60 space-y-3">
+                    <div class="bg-orange-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex justify-between items-center">
+                        <span>Entrevista</span> <span class="bg-orange-700 px-2 py-0.5 rounded-md text-[10px]">2</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-purple-600 text-sm font-bold">nu</span>
+                            <h4 class="font-bold text-sm text-slate-800">Nubank</h4>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Estágio em Dados</p>
+                        <p class="text-[10px] text-slate-400"><i class="fa-regular fa-calendar mr-1"></i> 20/05/2026</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="text-red-500 text-xs font-bold">ifood</span>
+                            <h4 class="font-bold text-sm text-slate-800">iFood</h4>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Cientista de Dados</p>
+                        <p class="text-[10px] text-slate-400"><i class="fa-regular fa-calendar mr-1"></i> 18/05/2026</p>
+                    </div>
+                    <button class="w-full border-2 border-dashed border-slate-300 text-slate-400 hover:text-slate-600 hover:border-slate-400 py-2 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1">
+                        + Adicionar vaga
+                    </button>
+                </div>
+
+                <div class="bg-slate-100/80 rounded-2xl p-3 border border-slate-200/60 space-y-3">
+                    <div class="bg-blue-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex justify-between items-center">
+                        <span>Teste técnico</span> <span class="bg-blue-700 px-2 py-0.5 rounded-md text-[10px]">1</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-blue-500 text-white font-bold text-[9px] px-1 rounded">Q</span>
+                            <h4 class="font-bold text-sm text-slate-800">QuintoAndar</h4>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Dados Júnior</p>
+                        <p class="text-[10px] text-slate-400"><i class="fa-regular fa-calendar mr-1"></i> 16/05/2026</p>
+                    </div>
+                    <button class="w-full border-2 border-dashed border-slate-300 text-slate-400 hover:text-slate-600 hover:border-slate-400 py-2 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1">
+                        + Adicionar vaga
+                    </button>
+                </div>
+
+                <div class="bg-slate-100/80 rounded-2xl p-3 border border-slate-200/60 space-y-3">
+                    <div class="bg-teal-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex justify-between items-center">
+                        <span>Aprovada</span> <span class="bg-teal-700 px-2 py-0.5 rounded-md text-[10px]">1</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="bg-zinc-800 text-white text-[9px] px-1 rounded font-bold">X</span>
+                            <h4 class="font-bold text-sm text-slate-800">Empresa X</h4>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Analista de Dados</p>
+                        <p class="text-[10px] text-slate-400"><i class="fa-regular fa-calendar mr-1"></i> 10/05/2026</p>
+                    </div>
+                    <button class="w-full border-2 border-dashed border-slate-300 text-slate-400 hover:text-slate-600 hover:border-slate-400 py-2 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1">
+                        + Adicionar vaga
+                    </button>
+                </div>
+
+                <div class="bg-slate-100/80 rounded-2xl p-3 border border-slate-200/60 space-y-3">
+                    <div class="bg-red-600 text-white px-3 py-1.5 rounded-xl text-xs font-bold flex justify-between items-center">
+                        <span>Rejeitada</span> <span class="bg-red-700 px-2 py-0.5 rounded-md text-[10px]">1</span>
+                    </div>
+                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 hover:shadow-md transition space-y-2">
+                        <div class="flex items-center gap-2">
+                            <span class="font-black text-black text-xs">c6</span>
+                            <h4 class="font-bold text-sm text-slate-800">C6 Bank</h4>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Analista de Dados</p>
+                        <p class="text-[10px] text-slate-400"><i class="fa-regular fa-calendar mr-1"></i> 12/05/2026</p>
+                    </div>
+                    <button class="w-full border-2 border-dashed border-slate-300 text-slate-400 hover:text-slate-600 hover:border-slate-400 py-2 rounded-xl text-xs font-medium transition flex items-center justify-center gap-1">
+                        + Adicionar vaga
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="page-comparador" class="space-y-6 hidden">
+            <div class="flex justify-between items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-slate-800">Comparador de vagas</h2>
+                    <p class="text-slate-500 text-sm mt-1">Compare oportunidades lado a lado</p>
+                </div>
+                <button class="bg-orange-500 hover:bg-orange-600 text-white font-medium px-5 py-2.5 rounded-xl shadow-md transition flex items-center gap-2">
+                    <i class="fa-solid fa-plus text-sm"></i> Adicionar vaga
+                </button>
+            </div>
+
+            <div class="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-100">
+                            <th class="p-5 font-bold text-slate-700 w-1/4">Empresa</th>
+                            <th class="p-5 w-1/4">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-purple-600 font-bold bg-purple-50 px-2 py-1 rounded-lg">nu</span>
+                                    <span class="font-bold text-slate-800">Nubank</span>
+                                </div>
+                            </th>
+                            <th class="p-5 w-1/4">
+                                <div class="flex items-center gap-2">
+                                    <span class="bg-black text-white px-1.5 py-0.5 rounded font-bold text-xs">xp</span>
+                                    <span class="font-bold text-slate-800">XP Inc.</span>
+                                </div>
+                            </th>
+                            <th class="p-5 w-1/4">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-red-500 font-extrabold text-sm">ifood</span>
+                                    <span class="font-bold text-slate-800">iFood</span>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 text-sm font-medium text-slate-600">
+                        <tr>
+                            <td class="p-5 text-slate-400 font-medium">Cargo</td>
+                            <td class="p-5 text-slate-800 font-semibold">Estágio em Dados</td>
+                            <td class="p-5 text-slate-800 font-semibold">Analista de Dados Jr.</td>
+                            <td class="p-5 text-slate-800 font-semibold">Cientista de Dados</td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-5 text-slate-400 font-medium">Salário</td>
+                            <td class="p-5 text-slate-800 font-semibold">R$ 2.000 - 2.500</td>
+                            <td class="p-5 text-slate-800 font-semibold">R$ 3.000 - 4.000</td>
+                            <td class="p-5 text-slate-800 font-semibold">R$ 4.000 - 6.000</td>
+                        </tr>
+                        <tr>
+                            <td class="p-5 text-slate-400 font-medium">Modelo</td>
+                            <td class="p-5">Híbrido</td>
+                            <td class="p-5">Híbrido</td>
+                            <td class="p-5 text-emerald-600 bg-emerald-50/40 rounded-lg inline-block my-3 mx-5">Remoto</td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-5 text-slate-400 font-medium">Benefícios</td>
+                            <td class="p-5 text-amber-500"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star text-slate-300"></i></td>
+                            <td class="p-5 text-amber-500"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star text-slate-300"></i></td>
+                            <td class="p-5 text-amber-500"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></td>
+                        </tr>
+                        <tr>
+                            <td class="p-5 text-slate-400 font-medium">Área</td>
+                            <td class="p-5">Dados</td>
+                            <td class="p-5">Dados</td>
+                            <td class="p-5">Dados</td>
+                        </tr>
+                        <tr class="bg-slate-50/50">
+                            <td class="p-5 text-slate-400 font-medium">Nível</td>
+                            <td class="p-5">Estágio</td>
+                            <td class="p-5">Júnior</td>
+                            <td class="p-5">Pleno</td>
+                        </tr>
+                        <tr>
+                            <td class="p-5 text-slate-400 font-medium">Cultura e evol.</td>
+                            <td class="p-5 text-amber-500"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star text-slate-300"></i></td>
+                            <td class="p-5 text-amber-500"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star text-slate-300"></i><i class="fa-regular fa-star text-slate-300"></i></td>
+                            <td class="p-5 text-amber-500"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star text-slate-300"></i></td>
+                        </tr>
+                        <tr class="bg-slate-50 text-base font-bold">
+                            <td class="p-5 text-slate-500">Nota geral</td>
+                            <td class="p-5 text-orange-500 text-xl">4,5</td>
+                            <td class="p-5 text-orange-500 text-xl">3,8</td>
+                            <td class="p-5 text-orange-500 text-xl">4,2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-blue-50/50 border border-blue-100 rounded-2xl p-4 text-xs text-blue-700 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info"></i>
+                <span>Lembre-se: <strong>avaliação baseada nas suas preferências</strong> definidas nas configurações.</span>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function switchTab(tabName) {
+            // Captura as páginas e os botões
+            const pageMinhasVagas = document.getElementById('page-minhas-vagas');
+            const pageComparador = document.getElementById('page-comparador');
+            const btnMinhasVagas = document.getElementById('btn-minhas-vagas');
+            const btnComparador = document.getElementById('btn-comparador');
+
+            // Reseta estilos padrão dos botões
+            const defaultBtnClass = "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 hover:bg-white/10 text-left text-gray-300 font-normal";
+            const activeBtnClass = "w-full flex items-center gap-3 px-4 py-3 rounded-xl transition duration-200 bg-orange-500 text-white font-medium text-left shadow-lg shadow-orange-500/20";
+
+            if (tabName === 'minhas-vagas') {
+                // Alterna Visibilidade das páginas
+                pageMinhasVagas.classList.remove('hidden');
+                pageMinhasVagas.classList.add('block');
+                pageComparador.classList.remove('block');
+                pageComparador.classList.add('hidden');
+
+                // Alterna visual dos botões do Menu
+                btnMinhasVagas.className = activeBtnClass;
+                btnComparador.className = defaultBtnClass;
+            } else if (tabName === 'comparador') {
+                // Alterna Visibilidade das páginas
+                pageComparador.classList.remove('hidden');
+                pageComparador.classList.add('block');
+                pageMinhasVagas.classList.remove('block');
+                pageMinhasVagas.classList.add('hidden');
+
+                // Alterna visual dos botões do Menu
+                btnComparador.className = activeBtnClass;
+                btnMinhasVagas.className = defaultBtnClass;
+            }
+        }
+    </script>
+</body>
+</html>
