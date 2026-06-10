@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+<head>
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <script>
+    if (!localStorage.getItem("user")) {
+      window.location.href = "index.html"; // Se não tá logado, vai pro login
+    }
+  </script>
+</head>
+</head>
+<body>
+<nav style="background-color: #f0f0f0; padding: 10px; margin-bottom: 20px;">
+    <a href="index.html" style="margin-right: 15px; text-decoration: none; color: black;">Home</a>
+    <a href="cadastro.html" style="margin-right: 15px; text-decoration: none; color: black;">Cadastro de Vagas</a>
+    <a href="comparador.html" style="font-weight: bold; text-decoration: none; color: blue;">Comparador de Vagas</a>
+</nav>
+  <h1>Bem-vindo 🚀</h1>
+
+  <p id="usuario"></p>
+
+  <button onclick="logout()">Sair</button>
+
+  <script>
+
+    // PEGAR USUÁRIO
+    const user = localStorage.getItem("user");
+
+    // PROTEÇÃO
+    if (!user) {
+      window.location.href = "index.html";
+    }
+
+    // MOSTRAR USUÁRIO
+    document.getElementById("usuario").innerText =
+      "Logado como: " + user;
+
+    // LOGOUT
+    function logout() {
+      localStorage.removeItem("user");
+      window.location.href = "index.html";
+    }
+
+  </script>
+
+</body>
+</html>

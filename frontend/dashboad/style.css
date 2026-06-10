@@ -1,0 +1,173 @@
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+  background:#f4f5f7;
+}
+
+/* CONTAINER */
+.container{
+  display:flex;
+  min-height:100vh;
+}
+
+/* MENU */
+.sidebar{
+  width:250px;
+  background:#002b7f;
+  color:white;
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+
+.logo h2{
+  font-size:28px;
+  margin-bottom:40px;
+}
+
+.logo span{
+  color:#ff8c00;
+}
+
+.sidebar ul{
+  list-style:none;
+}
+
+.sidebar li{
+  padding:15px;
+  margin-bottom:10px;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.sidebar li:hover{
+  background:#0d47c5;
+}
+
+.sidebar li i{
+  margin-right:10px;
+}
+
+.active{
+  background:#ff8c00;
+}
+
+.logout{
+  padding:15px;
+  cursor:pointer;
+}
+
+/* CONTEÚDO */
+.content{
+  flex:1;
+  padding:30px;
+}
+
+/* TOPO */
+.topo{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+}
+
+.topo h1{
+  font-size:35px;
+  color:#1d1d1d;
+}
+
+.topo p{
+  color:gray;
+  margin-top:5px;
+}
+
+.btn{
+  background:#ff8c00;
+  color:white;
+  border:none;
+  padding:12px 20px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:16px;
+}
+
+/* BOARD */
+.board{
+  display:flex;
+  gap:20px;
+  overflow-x:auto;
+}
+
+/* COLUNAS */
+.column{
+  background:#ececec;
+  width:240px;
+  border-radius:15px;
+  padding:15px;
+  min-height:500px;
+}
+
+.column h3{
+  padding:10px;
+  border-radius:10px;
+  color:white;
+  margin-bottom:15px;
+  text-align:center;
+}
+
+/* CORES */
+.azul-claro{
+  background:#5fa8ff;
+}
+
+.azul{
+  background:#005eff;
+}
+
+.laranja{
+  background:#ff8c00;
+}
+
+.roxo{
+  background:#7d5fff;
+}
+
+.verde{
+  background:#00b894;
+}
+
+.vermelho{
+  background:#ff3b30;
+}
+
+/* CARDS */
+.card{
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  margin-bottom:15px;
+  min-height:90px;
+  cursor:text;
+  box-shadow:0 2px 5px rgba(0,0,0,0.1);
+  outline:none;
+}
+
+/* BOTÃO ADD */
+.add{
+  width:100%;
+  border:none;
+  padding:10px;
+  border-radius:10px;
+  background:white;
+  cursor:pointer;
+  color:#555;
+  font-weight:bold;
+}
